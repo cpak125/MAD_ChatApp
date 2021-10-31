@@ -20,16 +20,6 @@ class Database {
     });
   }
 
-  // static Stream<List<UserEX>> streamUsersByList(List<String> userIds) {
-  //   final List<Stream<UserEX>> streams = [];
-  //   for (String id in userIds) {
-  //     streams.add(_db.collection('users').doc(id).snapshots().map(
-  //         (DocumentSnapshot snap) =>
-  //             UserEX.fromMap(snap.data() as Map<String, UserEX>)));
-  //   }
-  //   return StreamZip<UserEX>(streams).asBroadcastStream();
-  // }
-
   static Stream<List<UserEX>> getUsersByList(List<String> userIds) {
     final List<Stream<UserEX>> streams = [];
     for (String id in userIds) {
@@ -69,7 +59,8 @@ class Database {
         'content': content,
         'read': false
       },
-      'users': <String>[id, pid]
+      'users': <String>[id, pid],
+      'rating': 0.0
     }).then((dynamic success) {
       final DocumentReference messageDoc = FirebaseFirestore.instance
           .collection('messages')
@@ -124,5 +115,16 @@ class Database {
         .catchError((dynamic error) {
           print(error);
         });
+  }
+
+  static void submitConvoRating(String convoID, double rating, UserEX peer) {
+    _db
+        .collection('messages')
+        .doc(convoID)
+        .set(<String, dynamic>{'rating': rating}, SetOptions(merge: true));
+
+    _db.collection('users').doc(peer.id).update({
+      'ratings': FieldValue.arrayUnion([rating])
+    });
   }
 }

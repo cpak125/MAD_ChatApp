@@ -1,3 +1,10 @@
+/*
+This program was adapated from a post by Yoganathan Shiv at 
+https://medium.com/flutter-community/a-chat-application-flutter-firebase-1d2e87ace78f
+
+(Source: https://github.com/Xenon-Labs/Flutter-Development/tree/master/chat_app)
+*/
+
 import 'package:chatapp/providers/providerInit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,5 +1,5 @@
 import 'package:chatapp/views/new_conversation_screen.dart';
-import 'package:chatapp/widgets/ratingBar.dart';
+import 'package:chatapp/widgets/convoRatingBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 class ConvoListItem extends StatelessWidget {
   ConvoListItem(
       {Key? key,
+      required this.rating,
       required this.user,
       required this.peer,
       required this.lastMessage})
@@ -17,6 +18,7 @@ class ConvoListItem extends StatelessWidget {
   final User user;
   final UserEX peer;
   final Map<dynamic, dynamic> lastMessage;
+  final double rating;
 
   late final BuildContext context;
   late final String groupId;
@@ -86,7 +88,9 @@ class ConvoListItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.all(8.0), child: ConvoRatingBar()),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ConvoRatingBar(
+                      rating: rating, peer: peer, convoId: getGroupChatId())),
               read
                   ? Container()
                   : Icon(Icons.brightness_1,

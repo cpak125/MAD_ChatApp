@@ -1,5 +1,4 @@
 import 'package:bubble/bubble.dart';
-import 'package:chatapp/views/home_builder.dart';
 import 'package:chatapp/views/home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,18 @@ class NewConversationScreen extends StatelessWidget {
   final String uid, convoID;
   final UserEX contact;
 
+  double avgRatings(List<dynamic> ratings) {
+    double average = ratings.reduce((a, b) => a + b) / ratings.length;
+    return double.parse(average.toStringAsFixed(2));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           bottom: PreferredSize(
-              child: Text("Avg rating: ", style: TextStyle(fontSize: 18)),
+              child: Text("Avg rating: ${avgRatings(contact.ratings)} ",
+                  style: TextStyle(fontSize: 18)),
               preferredSize: new Size.fromHeight(10.0)),
           backgroundColor: Colors.teal.shade300,
           title: Text(contact.name),

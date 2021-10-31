@@ -152,6 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
           .collection("users")
           .doc(userCredential.user!.uid)
           .set({
+            "ratings": []..length = 500,
             "email": _emailController.text,
             "fullName": _fullNameController.text,
             "id": userCredential.user!.uid,

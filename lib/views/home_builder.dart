@@ -124,14 +124,18 @@ class HomeBuilder extends StatelessWidget {
       for (Convo c in _convos) {
         if (c.userIds[0] == user.uid) {
           list.add(ConvoListItem(
-              user: user,
-              peer: userMap[c.userIds[1]]!,
-              lastMessage: c.lastMessage));
+            user: user,
+            peer: userMap[c.userIds[1]]!,
+            lastMessage: c.lastMessage,
+            rating: c.rating,
+          ));
         } else {
           list.add(ConvoListItem(
-              user: user,
-              peer: userMap[c.userIds[0]]!,
-              lastMessage: c.lastMessage));
+            user: user,
+            peer: userMap[c.userIds[0]]!,
+            lastMessage: c.lastMessage,
+            rating: c.rating,
+          ));
         }
       }
     }

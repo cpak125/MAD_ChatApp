@@ -32,23 +32,8 @@ class ConversationDetailsProvider extends StatelessWidget {
   final User user;
 
   @override
-  // Widget build(BuildContext context) {
-  //   return StreamProvider<List<UserEX>>.value(
-  //       value: Database.streamUsers(), initialData: [], child: HomeBuilder());
-  // }
-
   Widget build(BuildContext context) {
     return StreamProvider<List<UserEX>>.value(
         value: Database.streamUsers(), initialData: [], child: HomeBuilder());
   }
-
-  // List<String> getUserIds(List<Convo> _convos) {
-  //   final List<String> users = <String>[];
-  //   for (Convo c in _convos) {
-  //     (c.userIds[0] != user.uid)
-  //         ? users.add(c.userIds[0])
-  //         : users.add(c.userIds[1]);
-  //   }
-  //   return users;
-  // }
 }

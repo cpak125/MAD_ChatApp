@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Convo {
-  Convo({required this.id, required this.userIds, required this.lastMessage});
+  Convo(
+      {required this.id,
+      required this.userIds,
+      required this.lastMessage,
+      required this.rating});
 
   factory Convo.fromFireStore(DocumentSnapshot doc) {
     final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Convo(
         id: doc.id,
+        rating: data['rating'],
         userIds: data['users'] ?? <dynamic>[],
         lastMessage: data['lastMessage'] ?? <dynamic>{});
   }
@@ -15,6 +20,7 @@ class Convo {
   final String id;
   final List<dynamic> userIds;
   final Map<dynamic, dynamic> lastMessage;
+  final double rating;
 }
 
 class Message {
